@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+/* === UNIVERSAL FIX === */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  color: #000;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(240,240,240,0.9));
+  overflow-y: auto;
+}
+
+/* Title & Headings */
+h1, h2, h3, h4, p, a, button {
+  color: #000;
+  text-shadow: 1px 1px 3px rgba(255,255,255,0.8);
+}
+
+/* Buttons */
+button {
+  background: linear-gradient(90deg, #ff9966, #ff5e62);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.2s;
+}
+button:hover {
+  transform: scale(1.05);
+}
+
+/* Explore Section */
+#exploreSection {
+  padding: 30px;
+  text-align: center;
+}
+
+#searchBar {
+  width: 60%;
+  padding: 12px;
+  border-radius: 15px;
+  border: 2px solid #ff5e62;
+  font-size: 16px;
+  outline: none;
+  margin-bottom: 30px;
+}
+
+/* Destination Cards */
+#destinationsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  overflow-y: auto;
+  max-height: 70vh;
+  padding: 10px;
+}
+
+.destination-card {
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  width: 300px;
+  padding: 15px;
+  transition: transform 0.3s ease;
+  text-align: center;
+}
+
+.destination-card:hover {
+  transform: translateY(-5px);
+}
+
+.destination-card img {
+  width: 100%;
+  height: 200px;
+  border-radius: 10px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.destination-card h4 {
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+.destination-card p {
+  font-size: 14px;
+  color: #333;
+}
+
+.map-link {
+  text-decoration: none;
+  color: #007BFF;
+  font-weight: bold;
+}
+
+.map-link:hover {
+  text-decoration: underline;
+}
+</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wanderlust Dashboard</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="dashboard-bg">
+
+  <!-- Header -->
+  <header class="dashboard-header">
+    <h1>Wanderlust Bucketlist 🌍</h1>
+    <div class="profile-menu">
+      <img src="" alt="Profile Avatar" id="profileIcon">
+    </div>
+  </header>
+
+  <!-- Dashboard content -->
+  <main class="dashboard-content">
+    <h2>Welcome</h2>
+    <p>Your dream journeys await. Explore and plan your trips!</p>
+  <!-- Dashboard tabs inside main content -->
+  <div class="dashboard-tabs">
+    <button id="homeTab">Home</button>
+    <button id="exploreTab">Explore</button>
+    <button id="myTripsTab">My Trips</button>
+  <button id="bookingsTab">Bookings</button>
+    
+  </div>
+
+  <!-- EXPLORE SECTION -->
+  <div id="exploreSection" class="hidden">
+    <h3>Explore Destinations</h3>
+    <input type="text" id="searchInput" placeholder="Search destinations...">
+    <div id="searchResults"></div>
+  </div>
+
+  <!-- MY TRIPS SECTION -->
+  <div id="myTripsSection" class="hidden">
+    <h3>My Trips</h3>
+    <div class="trip-tabs">
+      <button id="wishlistTab">Wishlist</button>
+      <button id="plannedTab">Planned</button>
+      <button id="travelledTab">Travelled</button>
+    </div>
+    <div id="wishlistContent"></div>
+    <div id="plannedContent" class="hidden"></div>
+    <div id="travelledContent" class="hidden"></div>
+  </div>
+</main>
+<!-- BOOKINGS SECTION -->
+<div id="bookingsSection" class="hidden">
+  <h3>🧳 Travel Bookings</h3>
+  <p>Plan your travel with trusted sites below:</p>
+
+  <div class="booking-links">
+    <div class="booking-card">
+      <h4>🚆 Train Tickets</h4>
+      <a href="https://www.irctc.co.in/" target="_blank">Book on IRCTC</a>
+    </div>
+
+    <div class="booking-card">
+      <h4>🚌 Bus Tickets</h4>
+      <a href="https://www.redbus.in/" target="_blank">Book on RedBus</a>
+    </div>
+
+    <div class="booking-card">
+      <h4>✈️ Flight Tickets</h4>
+      <a href="https://www.makemytrip.com/flights/" target="_blank">Book on MakeMyTrip</a>
+    </div>
+
+    <div class="booking-card">
+      <h4>🏨 Hotels & Resorts</h4>
+      <a href="https://www.booking.com/" target="_blank">Book on Booking.com</a>
+    </div>
+  </div>
+</div>
+
+<!-- SIDE PROFILE PANEL -->
+<div class="profile-panel" id="profilePanel">
+  <h3>Profile</h3>
+
+  <div id="mainOptions">
+    <button id="avatarBtn" class="gradient-btn">Change Avatar</button>
+    <button id="updateBtn" class="gradient-btn">Update Profile</button>
+    <button id="passwordBtn" class="gradient-btn">Change Password</button>
+    <button id="logoutBtn" class="gradient-btn">Logout</button>
+    <button id="deleteBtn" class="gradient-btn">Delete Account</button>
+  </div>
+
+  <!-- Avatar Section -->
+<div id="avatarSection" class="hidden">
+  <h4>Select Avatar</h4>
+  
+  <!-- Current avatar -->
+  <img id="panelAvatar" 
+       src="" 
+       alt="Current Avatar" 
+       style="width:60px; height:60px; border-radius:50%; margin-bottom:10px;">
+  
+  <!-- Avatar options -->
+  <div class="avatar-options">
+    <img src="https://i.pravatar.cc/60?img=1" class="avatar-option">
+    <img src="https://i.pravatar.cc/60?img=2" class="avatar-option">
+    <img src="https://i.pravatar.cc/60?img=3" class="avatar-option">
+    <img src="https://i.pravatar.cc/60?img=4" class="avatar-option">
+  </div>
+
+  <button class="back-btn gradient-btn">Back</button>
+</div>
+
+
+
+  <!-- Update Profile Section -->
+  <div id="updateSection" class="hidden">
+    <h4>Update Profile</h4>
+    <form id="updateProfileForm">
+      <input type="text" id="editName" placeholder="Full Name" required>
+      <input type="email" id="editEmail" placeholder="Email" required>
+      <input type="tel" id="editPhone" placeholder="Phone (10 digits)" required pattern="[0-9]{10}">
+      <input type="text" id="editCountry" placeholder="Country" required>
+      <input type="text" id="editCity" placeholder="City" required>
+      <input type="text" id="editFav" placeholder="Favorite Destination" required>
+      <button type="submit" class="gradient-btn">Save</button>
+      <button type="button" class="back-btn gradient-btn">Back</button>
+    </form>
+  </div>
+
+  <!-- Change Password Section -->
+  <div id="passwordSection" class="hidden">
+    <h4>Change Password</h4>
+    <form id="changePasswordForm">
+      <input type="password" id="currentPassword" placeholder="Current Password" required>
+      <input type="password" id="newPassword" placeholder="New Password" required>
+      <input type="password" id="confirmPassword" placeholder="Confirm New Password" required>
+      <button type="submit" class="gradient-btn">Update Password</button>
+      <button type="button" class="back-btn gradient-btn">Back</button>
+    </form>
+  </div>
+</div>
+
+<!-- Profile Panel Inline -->
+<div class="profile-panel-inline hidden" id="profilePanel">
+  <h3>Profile</h3>
+  <div id="mainOptions">
+    <button id="avatarBtn" class="gradient-btn">Change Avatar</button>
+    <button id="updateBtn" class="gradient-btn">Update Profile</button>
+    <button id="passwordBtn" class="gradient-btn">Change Password</button>
+    <button id="logoutBtn" class="gradient-btn">Logout</button>
+    <button id="deleteBtn" class="gradient-btn">Delete Account</button>
+  </div>
+
+  <div id="avatarSection" class="hidden">
+    <h4>Select Avatar</h4>
+    <img id="panelAvatar" src="" alt="Current Avatar" style="width:60px;height:60px;border-radius:50%;margin-bottom:10px;">
+    <div class="avatar-options">
+      <img src="https://i.pravatar.cc/60?img=1" class="avatar-option">
+      <img src="https://i.pravatar.cc/60?img=2" class="avatar-option">
+      <img src="https://i.pravatar.cc/60?img=3" class="avatar-option">
+      <img src="https://i.pravatar.cc/60?img=4" class="avatar-option">
+    </div>
+    <button class="back-btn gradient-btn">Back</button>
+  </div>
+
+  <!-- Update & Password Sections same as before -->
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
